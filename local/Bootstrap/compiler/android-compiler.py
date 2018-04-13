@@ -31,6 +31,7 @@ def render_content_with_text(key, value):
         value = value.replace(ID_PLACE_HOLDER, Utils.get_android_id(), 1)
     return value
 
+
 file_uid = basename(input_file)[:basename(input_file).find(".")]
 path = input_file[:input_file.find(file_uid)]
 

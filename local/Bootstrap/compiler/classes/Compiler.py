@@ -30,7 +30,7 @@ class Compiler:
 
     def compile(self, tokens, output_file_path):
         dsl_file = tokens
-        
+
         #Parse fix
         dsl_file = dsl_file[1:-1]
         dsl_file = ' '.join(dsl_file)
@@ -39,12 +39,12 @@ class Compiler:
         dsl_file = dsl_file.split('8')
         dsl_file = list(filter(None, dsl_file))
         #End Parse fix
-        
+
         current_parent = self.root
-        
+
         for token in dsl_file:
             token = token.replace(" ", "").replace("\n", "")
-           
+
             if token.find(self.opening_tag) != -1:
                 token = token.replace(self.opening_tag, "")
 
@@ -62,11 +62,11 @@ class Compiler:
         output_html = self.root.render(self.dsl_mapping, rendering_function=render_content_with_text)
         if output_html is None:
             return "Parsing Error"
-        
+
         with open(output_file_path, 'w') as output_file:
            output_file.write(output_html)
         return output_html
-    
-    
+
+
 FILL_WITH_RANDOM_TEXT = True
 TEXT_PLACE_HOLDER = "[]"

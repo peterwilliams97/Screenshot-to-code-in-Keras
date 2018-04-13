@@ -14,7 +14,7 @@ if __name__ == "__main__":
     if length != 0:
         input_file = argv[0]
     else:
-        print("Error: not enough argument supplied:")
+        print("Error: not enough arguments")
         print("web-compiler.py <path> <file name>")
         exit(0)
 

@@ -26,7 +26,7 @@ class Node:
                 return
             else:
                 content += placeholder
-            
+
         value = mapping.get(self.key, None)
         if value is None:
             self = None
