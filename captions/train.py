@@ -95,7 +95,7 @@ def max_length(descriptions):
 
 # create sequences of images, input sequences and output words for an image
 def create_sequences(tokenizer, max_length, descriptions, photos):
-    X1, X2, y = list(), list(), list()
+    X1, X2, y = [], [], []
     # walk through each image identifier
     for key, desc_list in descriptions.items():
         # walk through each description for the image
@@ -114,7 +114,16 @@ def create_sequences(tokenizer, max_length, descriptions, photos):
                 X1.append(photos[key][0])
                 X2.append(in_seq)
                 y.append(out_seq)
-    return array(X1), array(X2), array(y)
+    print('X1:', len(X1), X1[0].shape, X1[0].dtype)
+    print('X2:', len(X2), X2[0].shape, X2[0].dtype)
+    print('y :', len(y), y[0].shape, y[0].dtype)
+    X1 = array(X1)
+    X2 = array(X2)
+    y = array(y)
+    print('X1:', X1.shape, X1.dtype)
+    print('X2:', X2.shape, X2.dtype)
+    print('y :', y.shape, y.dtype)
+    return X1, X2, y
 
 
 # define the captioning model
