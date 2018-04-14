@@ -93,7 +93,7 @@ def max_length(descriptions):
 
 # create sequences of images, input sequences and output words for an image
 def create_sequences(tokenizer, max_length, desc_list, photo):
-    X1, X2, y = list(), list(), list()
+    X1, X2, y = [], [], []
     # walk through each description for the image
     for desc in desc_list:
         # encode the sequence
@@ -167,15 +167,30 @@ print('Vocabulary Size: %d' % vocab_size)
 max_length = max_length(train_descriptions)
 print('Description Length: %d' % max_length)
 
+# load test set
+filename = 'Flickr8k_text/Flickr_8k.devImages.txt'
+test = load_set(filename)
+print('Dataset: %d' % len(test))
+# descriptions
+test_descriptions = load_clean_descriptions('descriptions.txt', test)
+print('Descriptions: test=%d' % len(test_descriptions))
+# photo features
+test_features = load_photo_features('features.pkl', test)
+print('Photos: test=%d' % len(test_features))
+
 # define the model
 model = define_model(vocab_size, max_length)
 # train the model, run epochs manually and save after each epoch
 epochs = 20
 steps = len(train_descriptions)
+test_steps = len(test_descriptions)
+
 for i in range(epochs):
     # create the data generator
-    generator = data_generator(train_descriptions, train_features, tokenizer, max_length)
+    train_gen = data_generator(train_descriptions, train_features, tokenizer, max_length)
+    test_gen = data_generator(test_descriptions, test_features, tokenizer, max_length)
     # fit for one epoch
-    model.fit_generator(generator, epochs=1, steps_per_epoch=steps, verbose=1)
+    model.fit_generator(train_gen, validation_data=test_gen, epochs=1,
+        steps_per_epoch=steps, validation_steps=test_steps, verbose=1)
     # save model
     model.save('model_' + str(i) + '.h5')

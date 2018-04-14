@@ -17,7 +17,7 @@ def extract_features(directory):
     # summarize
     print(model.summary())
     # extract features from each photo
-    features = dict()
+    features = {}
     for name in listdir(directory):
         # load an image from file
         filename = directory + '/' + name

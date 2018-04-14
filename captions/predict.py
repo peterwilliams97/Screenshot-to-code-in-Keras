@@ -68,8 +68,9 @@ tokenizer = load(open('tokenizer.pkl', 'rb'))
 # pre-define the max sequence length (from training)
 max_length = 34
 # load the model
-# model = load_model('model-ep003-loss3.693-val_loss3.860.h5')
-model = load_model('model-ep006-loss3.526-val_loss3.837.h5')  # startseq dog is running through water endseq
+# article                                                       startseq dog is running across the beach endseq
+model = load_model('model-ep003-loss3.693-val_loss3.860.h5')
+# model = load_model('model-ep006-loss3.526-val_loss3.837.h5')  # startseq dog is running through water endseq
 # load and prepare the photograph
 photo = extract_features('dog.jpg')
 # generate description
