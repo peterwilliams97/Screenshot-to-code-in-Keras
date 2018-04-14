@@ -27,12 +27,14 @@ def extract_features(filename):
     feature = model.predict(image, verbose=0)
     return feature
 
+
 # map an integer to a word
 def word_for_id(integer, tokenizer):
     for word, index in tokenizer.word_index.items():
         if index == integer:
             return word
     return None
+
 
 # generate a description for an image
 def generate_desc(model, tokenizer, photo, max_length):
@@ -45,7 +47,7 @@ def generate_desc(model, tokenizer, photo, max_length):
         # pad input
         sequence = pad_sequences([sequence], maxlen=max_length)
         # predict next word
-        yhat = model.predict([photo,sequence], verbose=0)
+        yhat = model.predict([photo, sequence], verbose=0)
         # convert probability to integer
         yhat = argmax(yhat)
         # map integer to word
@@ -60,12 +62,14 @@ def generate_desc(model, tokenizer, photo, max_length):
             break
     return in_text
 
+
 # load the tokenizer
 tokenizer = load(open('tokenizer.pkl', 'rb'))
 # pre-define the max sequence length (from training)
 max_length = 34
 # load the model
-model = load_model('model-ep003-loss3.693-val_loss3.860.h5')
+# model = load_model('model-ep003-loss3.693-val_loss3.860.h5')
+model = load_model('model-ep006-loss3.526-val_loss3.837.h5')  # startseq dog is running through water endseq
 # load and prepare the photograph
 photo = extract_features('dog.jpg')
 # generate description
