@@ -195,4 +195,7 @@ for i in range(epochs):
         steps_per_epoch=steps, validation_steps=test_steps, verbose=1)
     # save model
     model.save('model_' + str(i) + '.h5')
-    predict(model)
+
+    # generate description
+    description = predict(model)
+    print(description)
