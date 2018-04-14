@@ -63,16 +63,24 @@ def generate_desc(model, tokenizer, photo, max_length):
     return in_text
 
 
-# load the tokenizer
-tokenizer = load(open('tokenizer.pkl', 'rb'))
-# pre-define the max sequence length (from training)
-max_length = 34
+def predict(model):
+    # load the tokenizer
+    tokenizer = load(open('tokenizer.pkl', 'rb'))
+    # pre-define the max sequence length (from training)
+    max_length = 34
+    photo = extract_features('dog.jpg')
+    # generate description
+    return generate_desc(model, tokenizer, photo, max_length)
+
+
 # load the model
-# article                                                       startseq dog is running across the beach endseq
-model = load_model('model-ep003-loss3.693-val_loss3.860.h5')
+# article                                                         startseq dog is running across the beach endseq
+model = load_model('model-ep003-loss3.693-val_loss3.860.h5')    # startseq black dog is running through the snow endseq
 # model = load_model('model-ep006-loss3.526-val_loss3.837.h5')  # startseq dog is running through water endseq
 # load and prepare the photograph
-photo = extract_features('dog.jpg')
-# generate description
-description = generate_desc(model, tokenizer, photo, max_length)
-print(description)
+
+if __name__ == '__main__':
+    # generate description
+    description = predict(model)
+    print(description)
+

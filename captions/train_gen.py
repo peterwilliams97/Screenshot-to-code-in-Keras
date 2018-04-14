@@ -12,6 +12,7 @@ from keras.layers import Embedding
 from keras.layers import Dropout
 from keras.layers.merge import add
 from keras.callbacks import ModelCheckpoint
+from predict import predict
 
 
 # load doc into memory
@@ -194,3 +195,4 @@ for i in range(epochs):
         steps_per_epoch=steps, validation_steps=test_steps, verbose=1)
     # save model
     model.save('model_' + str(i) + '.h5')
+    predict(model)
