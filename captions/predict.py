@@ -73,13 +73,14 @@ def predict(model):
     return generate_desc(model, tokenizer, photo, max_length)
 
 
-# load the model
-# article                                                         startseq dog is running across the beach endseq
-model = load_model('model-ep003-loss3.693-val_loss3.860.h5')    # startseq black dog is running through the snow endseq
-# model = load_model('model-ep006-loss3.526-val_loss3.837.h5')  # startseq dog is running through water endseq
-# load and prepare the photograph
-
 if __name__ == '__main__':
+
+    # load the model
+    # article                                                         startseq dog is running across the beach endseq
+    model = load_model('model-ep003-loss3.693-val_loss3.860.h5')    # startseq black dog is running through the snow endseq
+    # model = load_model('model-ep006-loss3.526-val_loss3.837.h5')  # startseq dog is running through water endseq
+    # load and prepare the photograph
+
     # generate description
     description = predict(model)
     print(description)
