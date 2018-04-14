@@ -46,7 +46,7 @@ def load_clean_descriptions(filename, dataset):
             descriptions[image_id].append(desc)
     return descriptions
 
-# covert a dictionary of clean descriptions to a list of descriptions
+# convert a dictionary of clean descriptions to a list of descriptions
 def to_lines(descriptions):
     all_desc = list()
     for key in descriptions.keys():

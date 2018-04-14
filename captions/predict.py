@@ -7,6 +7,8 @@ from keras.preprocessing.image import img_to_array
 from keras.applications.vgg16 import preprocess_input
 from keras.models import Model
 from keras.models import load_model
+import os
+
 
 # extract features from each photo in the directory
 def extract_features(filename):
@@ -61,6 +63,10 @@ def generate_desc(model, tokenizer, photo, max_length):
         if word == 'endseq':
             break
     return in_text
+
+
+assert os.path.exists('tokenizer.pkl')
+assert os.path.exists('dog.jpg')
 
 
 def predict(model):
