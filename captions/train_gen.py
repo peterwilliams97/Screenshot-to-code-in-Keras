@@ -12,7 +12,7 @@ from keras.layers import Embedding
 from keras.layers import Dropout
 from keras.layers.merge import add
 from keras.callbacks import ModelCheckpoint
-from predict import predict
+from predict import test_prediction
 
 
 # load doc into memory
@@ -197,5 +197,4 @@ for i in range(epochs):
     model.save('model_' + str(i) + '.h5')
 
     # generate description
-    description = predict(model)
-    print(description)
+    test_prediction(model)

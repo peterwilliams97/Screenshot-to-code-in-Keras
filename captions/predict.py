@@ -65,18 +65,28 @@ def generate_desc(model, tokenizer, photo, max_length):
     return in_text
 
 
+images = ['dog.jpg', 'family.jpg', 'form.png']
+
 assert os.path.exists('tokenizer.pkl')
-assert os.path.exists('dog.jpg')
+for image_path in images:
+    assert os.path.exists(image_path), image_path
 
 
-def predict(model):
+def predict(model, image_path):
     # load the tokenizer
     tokenizer = load(open('tokenizer.pkl', 'rb'))
     # pre-define the max sequence length (from training)
     max_length = 34
-    photo = extract_features('dog.jpg')
+    photo = extract_features(image_path)
     # generate description
     return generate_desc(model, tokenizer, photo, max_length)
+
+
+def test_prediction(model):
+    # generate descriptions
+    for image_path in images:
+        description = predict(model, image_path)
+        print('%s: %s' % (image_path, description))
 
 
 if __name__ == '__main__':
@@ -87,7 +97,4 @@ if __name__ == '__main__':
     # model = load_model('model-ep006-loss3.526-val_loss3.837.h5')  # startseq dog is running through water endseq
     # load and prepare the photograph
 
-    # generate description
-    description = predict(model)
-    print(description)
-
+    test_prediction(model)
