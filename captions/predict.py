@@ -72,9 +72,7 @@ for image_path in images:
     assert os.path.exists(image_path), image_path
 
 
-def predict(model, image_path):
-    # load the tokenizer
-    tokenizer = load(open('tokenizer.pkl', 'rb'))
+def predict(tokenizer, model, image_path):
     # pre-define the max sequence length (from training)
     max_length = 34
     photo = extract_features(image_path)
@@ -83,10 +81,13 @@ def predict(model, image_path):
 
 
 def test_prediction(model):
+     # load the tokenizer
+    tokenizer = load(open('tokenizer.pkl', 'rb'))
     # generate descriptions
     for image_path in images:
-        description = predict(model, image_path)
+        description = predict(tokenizer, model, image_path)
         print('%s: %s' % (image_path, description))
+    del tokenizer
 
 
 if __name__ == '__main__':
